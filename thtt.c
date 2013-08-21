@@ -16,7 +16,7 @@
 /*
 ** thtt or Too Hot To Touch is used to check the last modified time of a file,
 ** and then update the last modified time to the current value. If the last
-** modified time was less than 240 seconds, then it exits with failure
+** modified time was less than 120 seconds, then it exits with failure
 ** otherwise it will exit with a normal exit value.
 **
 ** This is useful in init scripts on android for checking when the last time
@@ -44,7 +44,7 @@ int main (int argc, char *argv[]) {
     struct stat lastRanFile;
 
     if (stat(buffer, &lastRanFile) == 0){
-        if (lastRanFile.st_mtime + 240 < time(NULL)){
+        if (lastRanFile.st_mtime + 120 < time(NULL)){
             utime(buffer, NULL);
             exit (EXIT_SUCCESS);
         }else {
